@@ -1,0 +1,25 @@
+{
+	"folders": [ { "path": "." } ], // Just the root folder should be allowed
+	"settings": {
+		"editor.rulers": [80], // Create a 80 character ruler, for consistency
+	},
+	"tasks": {
+		"version": "2.0.0",
+		"tasks": [
+			{
+				"label": "TSC Watch",
+				"command": "tsc --watch",
+				"type": "shell",
+				"args": [],
+				"problemMatcher": ["$tsc"],
+				"presentation": {"reveal": "always"},
+				"group": "build"
+			}
+		]
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [],
+		"compounds": []
+	}
+}

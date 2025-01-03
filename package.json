@@ -1,0 +1,25 @@
+{
+  "name": "openuix",
+  "version": "0.1.0",
+  "description": "The web-based engine of the OpenUIX framework",
+  "keywords": [ "OpenUIX", "UI", "UX", "HCI" ],
+  "homepage": "https://github.com/MikelSalazar/OpenUIX_TypeScript#readme",
+  "bugs": { "url": "https://github.com/MikelSalazar/OpenUIX_TypeScript/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MikelSalazar/OpenUIX_TypeScript.git"
+  },
+  "license": "MIT",
+  "author": "Mikel Salazar",
+  "type": "module",
+  "main": "builds/index.js",
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "node utils/tester/tester.js",
+    "start": "node utils/builder/builder.js"
+  }
+}

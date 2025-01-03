@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+      "module": "ES6",
+      "noImplicitAny": true,
+      "removeComments": false,
+      "preserveConstEnums": true,
+      "outDir": "builds/modules",
+      "sourceMap": true
+    },
+    "include": ["sources/**/*"]
+  }
