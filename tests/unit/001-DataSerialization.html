@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Data Serialization - OpenUIX Tests</title>
+		<meta name="author" content="Mikel Salazar">
+		<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+		<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"> 
+	</head>
+	<body>
+		<script type="importmap">
+			{ "imports": { "modules/": "../../builds/modules/" } }
+		</script>
+		<script type="module">
+
+// -------------------------------------------------------------------- IMPORTS
+
+import { Serializable } from 'modules/data/serialization/Serializable.js';
+import { Serializer } from 'modules/data/serialization/Serializer.js';
+import { JsonSerializer } from 'modules/data/serialization/serializers/JsonSerializer.js';
+
+// --------------------------------------------------------------- UNIT TESTING
+
+import { TestEnvironment, TestGroup, Test } from "../js/TestEnvironment.js"
+import { TestControls } from "../js/TestControls.js"
+import { TestConsole } from "../js/TestConsole.js"
+
+// Create the test environment
+let t = new TestEnvironment();
+let testControls = new TestControls({ 
+	explanation: 'Data Serialization'
+});
+let testConsole = new TestConsole();
+
+
+// --------------------------------------------------------- DATA SERIALIZATION
+
+let serializationTests = new TestGroup('Data Serialization', t, true);
+
+new Test('Create a Void Serializable', serializationTests, () => { 
+	t.inspect('Serializable', new Serializable()); });
+
+new Test('Create a Serializable with a name', serializationTests, () => { 
+	t.inspect('Serializable', new Serializable('name')); });
+
+new Test('Create a Serializable with a name', serializationTests, () => { 
+	t.inspect('Serializable', new Serializable(undefined,{test:2}));}, 'ERROR');
+
+new Test('Create a base Serializer', serializationTests, () => { 
+	return new Serializer();}, 'ERROR');
+
+
+
+// --------------------------------------------------------- JSON SERIALIZATION
+
+let jsonTests = new TestGroup('JSON Serialization', t, true);
+
+new Test('Create a JsonSerializer', jsonTests, () => { 
+	return new JsonSerializer(); });
+
+new Test('Create a JsonSerializer ({singleLine: true})', jsonTests, () => { 
+	return new JsonSerializer({singleLine: true}); });
+
+new Test('Serialization of an undefined value', jsonTests, () => { 
+	return JsonSerializer.serializeData(); }, 'undefined');
+
+new Test('Serialization of a boolean value (true)', jsonTests, () => { 
+	return JsonSerializer.serializeData(true); }, 'true');
+
+new Test('Serialization of a boolean value (false)', jsonTests, () => { 
+	return JsonSerializer.serializeData(false); }, 'false');
+
+new Test('Serialization of a numeric value (0)', jsonTests, () => { 
+	return JsonSerializer.serializeData(0); }, '0');
+
+new Test('Serialization of a numeric value (1)', jsonTests, () => { 
+	return JsonSerializer.serializeData(1); }, '1');
+
+new Test('Serialization of a numeric value (MAX_VALUE)', jsonTests, () => { 
+	return JsonSerializer.serializeData(Number.MAX_VALUE); });
+
+new Test('Serialization of a numeric value (MIN_VALUE)', jsonTests, () => { 
+	return JsonSerializer.serializeData(Number.MIN_VALUE); });
+
+new Test('Serialization of a BigInt value (9007199254740991)', jsonTests, () => { 
+	return JsonSerializer.serializeData(BigInt(9007199254740991)); });
+
+new Test('Serialization of a string value ', jsonTests, () => { 
+	return JsonSerializer.serializeData("Testing"); });
+
+new Test('Serialization of a string value ', jsonTests, () => { 
+	return JsonSerializer.serializeData("\"\n"); });
+
+new Test('Serialization of an Array ([1, 2, 3])', jsonTests, () => { 
+	return JsonSerializer.serializeData([1, 2, 3]); });
+
+new Test('Serialization of a complex Array ([true, 2, "3"])', jsonTests, () => { 
+	return JsonSerializer.serializeData([true, 2, "3"]); });
+
+new Test('Serialization of a Array with long values', jsonTests, () => { 
+	return JsonSerializer.serializeData([
+		"Lorem ipsum dolor sit amet", 
+		"consectetur adipiscing elit",
+		"sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+	]);
+});
+
+new Test('Serialization of an Object { a: true, b:2, c:"3"}', jsonTests, () => { 
+	return JsonSerializer.serializeData({a: true, b: 2, c:"3"}); });
+
+new Test('Serialization of a complex Object', jsonTests, () => { 
+	return JsonSerializer.serializeData({
+		name: 'test', 
+		// description: 'A complex object',
+		properties: {
+			"objectivity" : true,
+			"complexity" : true,
+			"complexity1" : true,
+			"complexity2" : true,
+			"complexity3" : true,
+		}
+	});
+});
+
+// Run the tests
+t.start();
+			
+			</script>
+	</body>
+</html>

@@ -7,6 +7,7 @@ To ensure the creation of
 * Focus on standards:
 
 
-## Data File formats:
+## Data Interchange Format:
 
-JSON: JSON-LD JSON Schemas
+* **JSON:** JSON-LD JSON Schemas
+* **XML:**
