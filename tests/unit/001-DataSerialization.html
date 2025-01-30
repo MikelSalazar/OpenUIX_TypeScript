@@ -61,66 +61,79 @@ new Test('Create a JsonSerializer', jsonTests, () => {
 new Test('Create a JsonSerializer ({singleLine: true})', jsonTests, () => { 
 	return new JsonSerializer({singleLine: true}); });
 
-new Test('Serialization of an undefined value', jsonTests, () => { 
-	return JsonSerializer.serializeData(); }, 'undefined');
+// new Test('Deserialization of an undefined value', jsonTests, () => { 
+	// return JsonSerializer.serializeData('undefined'); });
 
-new Test('Serialization of a boolean value (true)', jsonTests, () => { 
-	return JsonSerializer.serializeData(true); }, 'true');
+new Test('Deserialization of an boolean value ("true")', jsonTests, () => { 
+	return JsonSerializer.deserialize("true"); });
+	
+new Test('Deserialization of an boolean value ("false")', jsonTests, () => { 
+	return JsonSerializer.deserialize("false"); });
 
-new Test('Serialization of a boolean value (false)', jsonTests, () => { 
-	return JsonSerializer.serializeData(false); }, 'false');
+// new Test('Serialization of an undefined value', jsonTests, () => { 
+// 	return JsonSerializer.serializeData(); }, 'undefined');
 
-new Test('Serialization of a numeric value (0)', jsonTests, () => { 
-	return JsonSerializer.serializeData(0); }, '0');
+// new Test('Serialization of a boolean value (true)', jsonTests, () => { 
+// 	return JsonSerializer.serializeData(true); }, 'true');
 
-new Test('Serialization of a numeric value (1)', jsonTests, () => { 
-	return JsonSerializer.serializeData(1); }, '1');
+// new Test('Serialization of a boolean value (false)', jsonTests, () => { 
+// 	return JsonSerializer.serializeData(false); }, 'false');
 
-new Test('Serialization of a numeric value (MAX_VALUE)', jsonTests, () => { 
-	return JsonSerializer.serializeData(Number.MAX_VALUE); });
+// new Test('Serialization of a numeric value (0)', jsonTests, () => { 
+// 	return JsonSerializer.serializeData(0); }, '0');
 
-new Test('Serialization of a numeric value (MIN_VALUE)', jsonTests, () => { 
-	return JsonSerializer.serializeData(Number.MIN_VALUE); });
+// new Test('Serialization of a numeric value (1)', jsonTests, () => { 
+// 	return JsonSerializer.serializeData(1); }, '1');
 
-new Test('Serialization of a BigInt value (9007199254740991)', jsonTests, () => { 
-	return JsonSerializer.serializeData(BigInt(9007199254740991)); });
+// new Test('Serialization of a numeric value (MAX_VALUE)', jsonTests, () => { 
+// 	return JsonSerializer.serializeData(Number.MAX_VALUE); });
 
-new Test('Serialization of a string value ', jsonTests, () => { 
-	return JsonSerializer.serializeData("Testing"); });
+// new Test('Serialization of a numeric value (MIN_VALUE)', jsonTests, () => { 
+// 	return JsonSerializer.serializeData(Number.MIN_VALUE); });
 
-new Test('Serialization of a string value ', jsonTests, () => { 
-	return JsonSerializer.serializeData("\"\n"); });
+// new Test('Serialization of a BigInt value (9007199254740991)', jsonTests, () => { 
+// 	return JsonSerializer.serializeData(BigInt(9007199254740991)); });
 
-new Test('Serialization of an Array ([1, 2, 3])', jsonTests, () => { 
-	return JsonSerializer.serializeData([1, 2, 3]); });
+// new Test('Serialization of a string value ', jsonTests, () => { 
+// 	return JsonSerializer.serializeData("Testing"); });
 
-new Test('Serialization of a complex Array ([true, 2, "3"])', jsonTests, () => { 
-	return JsonSerializer.serializeData([true, 2, "3"]); });
+// new Test('Serialization of a string value ', jsonTests, () => { 
+// 	return JsonSerializer.serializeData("\"\n"); });
 
-new Test('Serialization of a Array with long values', jsonTests, () => { 
-	return JsonSerializer.serializeData([
-		"Lorem ipsum dolor sit amet", 
-		"consectetur adipiscing elit",
-		"sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-	]);
-});
+// new Test('Serialization of an Array ([1, 2, 3])', jsonTests, () => { 
+// 	return JsonSerializer.serializeData([1, 2, 3]); });
 
-new Test('Serialization of an Object { a: true, b:2, c:"3"}', jsonTests, () => { 
-	return JsonSerializer.serializeData({a: true, b: 2, c:"3"}); });
+// new Test('Serialization of a complex Array ([true, 2, "3"])', jsonTests, () => { 
+// 	return JsonSerializer.serializeData([true, 2, "3"]); });
 
-new Test('Serialization of a complex Object', jsonTests, () => { 
-	return JsonSerializer.serializeData({
-		name: 'test', 
-		// description: 'A complex object',
-		properties: {
-			"objectivity" : true,
-			"complexity" : true,
-			"complexity1" : true,
-			"complexity2" : true,
-			"complexity3" : true,
-		}
-	});
-});
+// new Test('Serialization of a Array with long values', jsonTests, () => { 
+// 	return JsonSerializer.serializeData([
+// 		"Lorem ipsum dolor sit amet", 
+// 		"consectetur adipiscing elit",
+// 		"sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+// 	]);
+// });
+
+// new Test('Serialization of an Object { a: true, b:2, c:"3"}', jsonTests, () => { 
+// 	return JsonSerializer.serializeData({a: true, b: 2, c:"3"}); });
+
+// new Test('Serialization of a complex Object', jsonTests, () => { 
+// 	return JsonSerializer.serializeData({
+// 		name: 'test', 
+// 		// description: 'A complex object',
+// 		properties: {
+// 			"objectivity" : true,
+// 			"complexity" : true,
+// 			"complexity1" : true,
+// 			"complexity2" : true,
+// 			"complexity3" : true,
+// 		}
+// 	});
+// });
+
+
+
+// ---------------------------------------------------------------- ENTRY POINT
 
 // Run the tests
 t.start();

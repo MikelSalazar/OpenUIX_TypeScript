@@ -39,8 +39,8 @@ export class JsonSerializer extends Serializer {
 		let lc = undefined, c = undefined, nc = undefined;
 
 		// Start parsing
-		let node = { start: 0, type: 'any', a: [] };
-		let lastCharIndex = -1, states = ['any'];
+		let node = { start: 0, type: 'any'};
+		let lastCharIndex = 0, states = ['any'];
 		for (let charIndex = 0; charIndex < charCount; charIndex++) {
 			
 			// If no jump has not happened, just copy the previous values
@@ -55,19 +55,31 @@ export class JsonSerializer extends Serializer {
 			switch (state) {
 				case 'any': 
 					if (c == '{') {
-						states.push('object')
+						states.push(state = 'object')
 					} else if (c == '[') {
-						states.push('array');
+						states.push(state = 'array');
 					} else if (c == '"') {
-						states.push('string');
-					} else if (c == '-' || c == '.' || c == '1' || c == '0'
-						|| c == '2' || c == '3' || c == '4' || c == '5'
-						|| c == '6' || c == '7' || c == '8' || c == '9') {
-						states.push('number');
+						states.push(state = 'string');
+					} else if (c == '-' || c == '.' || (c >= '0' && c <= '9')) {
+						states.push(state = 'number');
+					} else if (c == 't' || c == 'f') {
+						states.push(state = 'boolean');
 					} else throw Error ('Invalid character "' + c + '" at ' + 
 						charIndex +' while looking for: any');
-
-				break;
+				case 'boolean':
+					if (charIndex + 4 < charCount && c == 't' && nc == 'r' &&
+						chars[charIndex+2] == 'u' && chars[charIndex+3] == 'e'){
+							charIndex += 4; return true;
+					} else if (charIndex + 5 < charCount  && c == 'f' && 
+						nc == 'a' && chars[charIndex+2] == 'l' && 
+						chars[charIndex+3] == 's' && chars[charIndex+2] == 'e'){
+							charIndex += 5; return false;
+					}
+					
+					
+				default:
+					return states[states.length-1];
+				
 
 			}
 		}
