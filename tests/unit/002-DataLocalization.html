@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Data Localization - OpenUIX Tests</title>
+		<meta name="author" content="Mikel Salazar">
+		<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+		<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"> 
+	</head>
+	<body>
+		<script type="importmap">
+{ "imports": { "modules/": "../../builds/modules/" } }
+		</script>
+		<script type="module">
+
+// -------------------------------------------------------------------- IMPORTS
+
+import { Locale } from 'modules/data/localization/Locale.js';
+import { Localized } from 'modules/data/localization/Localized.js';
+
+
+// --------------------------------------------------------------- UNIT TESTING
+
+import { TestEnvironment, TestGroup, Test } from "../js/TestEnvironment.js"
+import { TestControls } from "../js/TestControls.js"
+import { TestConsole } from "../js/TestConsole.js"
+
+// Create the test environment
+let testEnvironment = new TestEnvironment();
+let testControls = new TestControls({ 
+	explanation: 'Data Localization'
+});
+let testConsole = new TestConsole();
+
+
+// ---------------------------------------------------------- DATA LOCALIZATION
+
+let tests = new TestGroup("Data Localization", testEnvironment, true);
+
+new Test("Create Locale", tests, () => { 
+	let locale = new Locale("Test");
+	testEnvironment.log("Locale: " + JSON.stringifyI(locale), 4);
+});
+
+
+// Run the tests
+testEnvironment.start();
+
+		</script>
+	</body>
+</html>

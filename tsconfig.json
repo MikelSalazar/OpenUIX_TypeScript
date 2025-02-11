@@ -1,11 +1,15 @@
 {
-    "compilerOptions": {
-      "module": "ES6",
-      "noImplicitAny": true,
-      "removeComments": false,
-      "preserveConstEnums": true,
-      "outDir": "builds/modules",
-      "sourceMap": true
-    },
-    "include": ["sources/**/*"]
+	"compilerOptions": {
+		"module": "ES6",
+		"target": "ES2020",
+		"noImplicitAny": true,
+		"removeComments": true,
+		"preserveConstEnums": true,
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
+		"moduleResolution": "Node",
+		"outDir": "builds/modules/",
+		"sourceMap": true,
+	},
+	"include": ["sources/**/*"]
   }
