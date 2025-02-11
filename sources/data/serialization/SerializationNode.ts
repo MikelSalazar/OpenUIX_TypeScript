@@ -32,10 +32,17 @@ export class SerializationNode {
 	/** The content of the SerializationNode. */
 	protected _content: any;
 
+<<<<<<< HEAD
 	/** The start position of the SerializationNode in the document. */
 	protected _startPosition: URL;
 
 	/** The end position of the SerializationNode in the document. */
+=======
+	/** The start position of the SerializationNode. */
+	protected _startPosition: URL;
+
+	/** The end position of the SerializationNode in the . */
+>>>>>>> 5ed89ce9db5b51dfc9a12ae03244c3d25e013cd4
 	protected _endPosition: URL;
 
 
