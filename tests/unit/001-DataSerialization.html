@@ -16,8 +16,8 @@
 // -------------------------------------------------------------------- IMPORTS
 
 import { Serializable } from 'modules/data/serialization/Serializable.js';
-import { Serializer } from 'modules/data/serialization/Serializer.js';
-import { JsonSerializer } from 'modules/data/serialization/serializers/JsonSerializer.js';
+// import { Serializer } from 'modules/data/serialization/Serializer.js';
+import { JsonSerializer } from 'modules/data/serialization/encoding/JsonEncoding.js';
 
 // --------------------------------------------------------------- UNIT TESTING
 
@@ -56,10 +56,10 @@ new Test('Create a base Serializer', serializationTests, () => {
 let jsonTests = new TestGroup('JSON Serialization', t, true);
 
 new Test('Create a JsonSerializer', jsonTests, () => { 
-	return new JsonSerializer(); });
+	return new JsonEncoding(); });
 
 new Test('Create a JsonSerializer ({singleLine: true})', jsonTests, () => { 
-	return new JsonSerializer({singleLine: true}); });
+	return new JsonEncoding({singleLine: true}); });
 
 // new Test('Deserialization of an undefined value', jsonTests, () => { 
 	// return JsonSerializer.serializeData('undefined'); });
