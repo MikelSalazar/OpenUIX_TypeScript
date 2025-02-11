@@ -1,8 +1,8 @@
-import { SerializationElement } from "../SerializationElement";
+import { SerializationDocument } from "../SerializationDocument.js";
+import { SerializationNode } from "../SerializationNode.js";
 
-/** Provides a way to parse from and unparse to JSON strings. */
-export class JsonFormat {
-
+/** Provides a way to encode to and decode from JSON strings. */
+export class JsonEncoding {
 
 	// ----------------------------------------------------- PUBLIC CONSTRUCTOR
 
@@ -19,21 +19,22 @@ export class JsonFormat {
 
 	// --------------------------------------------------------- PUBLIC METHODS
 
-	/** Translates a JSON string to a SerializationElement.
-	 * @param {string} dataString The JSON string to parse.
-	 * @returns The SerializationElement created from the JSON string. */
-	parse(dataString: string): SerializationElement {
+	/** Translates a JSON document to a SerializationNode.
+	 * @param {SerializationDocument} document The JSON document.
+	 * @returns The SerializationNode created from the JSON string. */
+	decode(document: SerializationDocument): SerializationNode {
 
 		// Get the size of the data string
-		let chars = dataString, charCount = chars.length;
+		let chars = document.content, charCount = chars.length;
 		if (charCount == 0) return;
 
 		// Parse the string using a simple
 		let lc = undefined, c = undefined, nc = undefined;
 
 		// Start parsing
-		let node = { start: 0, type: 'any'};
+		let node = new SerializationNode(), nodes = [];
 		let lastCharIndex = 0, states = ['any'];
+
 		for (let charIndex = 0; charIndex < charCount; charIndex++) {
 
 			// If no jump has not happened, just copy the previous values
@@ -59,29 +60,31 @@ export class JsonFormat {
 						states.push(state = 'boolean');
 					} else throw Error ('Invalid character "' + c + '" at ' + 
 						charIndex +' while looking for: any');
+					
 				case 'boolean':
 					if (charIndex + 4 < charCount && c == 't' && nc == 'r' &&
 						chars[charIndex+2] == 'u' && chars[charIndex+3] == 'e'){
-							charIndex += 4; return true;
+							charIndex += 4; node.content = true;
 					} else if (charIndex + 5 < charCount  && c == 'f' && 
 						nc == 'a' && chars[charIndex+2] == 'l' && 
 						chars[charIndex+3] == 's' && chars[charIndex+2] == 'e'){
-							charIndex += 5; return false;
-
+							charIndex += 5; node.content = false;
 					}
+					continue;
 				default:
-					return new SerializationElement(null, null, null);
+					return new SerializationNode(null, null, null);
 			}
 		}
-		return new SerializationElement(null, null, null);
+		return node;
 	}
 
 
-	/** Translates a JSON string to a SerializationElement.
+	/** Translates a JSON string to a SerializationNode.
 	 * @param {string} dataString The JSON string to parse.
 	 * @param {*} [params] The serialization parameters.
-	 * @returns The SerializationElement created from the JSON string. */
-	static parse(dataString: string, params?: object): SerializationElement {
-		return new JsonFormat(params).parse(dataString);
+	 * @returns The SerializationNode created from the JSON string. */
+	static parse(dataString: string, params?: object): SerializationNode {
+		return new JsonEncoding(params).decode(
+			new SerializationDocument(null, null, dataString));
 	}
 }

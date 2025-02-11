@@ -52,7 +52,7 @@ export class Localized<ValueType> extends Serializable {
 		this._values = {};
 
 		// Deserialize the given data
-		if (data != undefined) this.deserialize(data);
+		// if (data != undefined) this.deserialize(data);
 	}
 
 }

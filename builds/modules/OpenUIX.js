@@ -1,15 +1,11 @@
-/** The main class of the OpenUIX framework. */
-var OpenUIX = /** @class */ (function () {
-    // ----------------------------------------------------- PUBLIC CONSTRUCTOR
-    /** Initializes a new instance of the OpenUIX class.
-     * @param data The initialization data. */
-    function OpenUIX(data) {
+import { Node } from './data/Node.js';
+export { Serializable } from './data/serialization/Serializable.js';
+export { Node } from './data/Node.js';
+export class OpenUIX extends Node {
+    constructor(data) {
+        super('openuix', undefined, data);
         OpenUIX.instances.push(this);
     }
-    // ---------------------------------------------------------- PUBLIC FIELDS
-    /** The list of instances of the OpenUIX class. */
-    OpenUIX.instances = [];
-    return OpenUIX;
-}());
-export { OpenUIX };
+}
+OpenUIX.instances = [];
 //# sourceMappingURL=OpenUIX.js.map
